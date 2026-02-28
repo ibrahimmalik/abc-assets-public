@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream:      #F5F0E8;
+      --parchment:  #EDE7D6;
+      --gold:       #C9A84C;
+      --gold-light: #E8D08A;
+      --gold-dark:  #9A7A2E;
+      --ink:        #1A1612;
+      --ink-soft:   #3D3529;
+      --ink-muted:  #7A7062;
+      --maroon:     #6B1E2A;
+      --maroon-soft:#8B3040;
+      --white:      #FEFCF7;
+      --border:     rgba(201,168,76,0.25);
+      --border-dark:rgba(201,168,76,0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background:
+        radial-gradient(ellipse 900px 500px at 50% -60px, rgba(201,168,76,0.10), transparent 65%),
+        var(--cream);
+      color: var(--ink);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 36px 16px 56px;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 580px;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .abc-logo {
+      width: min(190px, 60vw);
+      height: auto;
+      display: block;
+      margin: 0 auto 14px;
+    }
+
+    .header-rule {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 auto;
+      max-width: 200px;
+    }
+
+    .header-rule span {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .diamond {
+      width: 5px; height: 5px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .header-sub {
+      margin-top: 10px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px 28px;
+      box-shadow:
+        0 2px 0 var(--gold),
+        0 20px 60px rgba(26,22,18,0.10),
+        0 4px 16px rgba(26,22,18,0.05);
+      position: relative;
+    }
+
+    .card::before, .card::after {
+      content: '';
+      position: absolute;
+      width: 18px; height: 18px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.45;
+    }
+    .card::before { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+    .card::after  { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+
+    /* ── Card header ── */
+    .card-eyebrow {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 500;
+      text-align: center;
+      color: var(--ink);
+      line-height: 1.25;
+    }
+
+    .card-sub {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--maroon);
+      margin-top: 5px;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-dark), transparent);
+      margin: 22px 0;
+    }
+
+    /* ── Period label ── */
+    .period-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 12px;
+    }
+
+    /* ── Stats grid ── */
+    .stats {
+      display: grid;
+      gap: 10px;
+    }
+
+    .stat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 2px;
+      background: linear-gradient(90deg, rgba(201,168,76,0.04), transparent 60%);
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-row::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+
+    .stat-row:hover {
+      background: linear-gradient(90deg, rgba(201,168,76,0.09), transparent 60%);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      letter-spacing: 0.3px;
+    }
+
+    .stat-desc {
+      font-size: 10px;
+      color: var(--ink-muted);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    .stat-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--maroon);
+      line-height: 1;
+      min-width: 40px;
+      text-align: right;
+    }
+
+    /* Highlight the Total row */
+    .stat-row.total {
+      border-color: rgba(201,168,76,0.45);
+      background: linear-gradient(90deg, rgba(201,168,76,0.09), transparent 60%);
+    }
+
+    .stat-row.total::before {
+      background: var(--gold);
+      opacity: 1;
+    }
+
+    .stat-row.total .stat-label {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .stat-row.total .stat-value {
+      font-size: 38px;
+      color: var(--maroon);
+    }
+
+    /* ── Footer ── */
+    .foot {
+      margin-top: 20px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-align: center;
+    }
+
+    .foot-note {
+      margin-top: 6px;
+      font-size: 10px;
+      color: var(--ink-muted);
+      text-align: center;
+      letter-spacing: 0;
+      font-weight: 400;
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="header">
+      <img class="abc-logo" src="<?= data.abc_logo_url ?>" alt="ABC Hyde Park Hotel">
+      <div class="header-rule">
+        <span></span><div class="diamond"></div><span></span>
+      </div>
+      <div class="header-sub">Internal Partner Report</div>
+    </div>
+
+    <div class="card">
+
+      <div class="card-eyebrow">Redemption Summary</div>
+      <h1 class="card-title"><?= data.partner.partner_name ?></h1>
+      <div class="card-sub">Approved Redemptions Only</div>
+
+      <div class="divider"></div>
+
+      <div class="period-label">Redemption Periods</div>
+
+      <div class="stats">
+
+        <div class="stat-row">
+          <div>
+            <div class="stat-label">Today</div>
+            <div class="stat-desc">Current calendar day</div>
+          </div>
+          <div class="stat-value"><?= data.report.today ?></div>
+        </div>
+
+        <div class="stat-row">
+          <div>
+            <div class="stat-label">Last 7 Days</div>
+            <div class="stat-desc">Rolling weekly window</div>
+          </div>
+          <div class="stat-value"><?= data.report.week ?></div>
+        </div>
+
+        <div class="stat-row">
+          <div>
+            <div class="stat-label">Last 30 Days</div>
+            <div class="stat-desc">Rolling monthly window</div>
+          </div>
+          <div class="stat-value"><?= data.report.month ?></div>
+        </div>
+
+        <div class="stat-row total">
+          <div>
+            <div class="stat-label">All Time Total</div>
+            <div class="stat-desc">Since activation</div>
+          </div>
+          <div class="stat-value"><?= data.report.total ?></div>
+        </div>
+
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="foot">ABC Hyde Park Hotel</div>
+      <div class="foot-note">Approved redemptions only &nbsp;·&nbsp; PIN protected &nbsp;·&nbsp; For internal use</div>
+    </div>
+
+  </div>
+</body>
+</html>

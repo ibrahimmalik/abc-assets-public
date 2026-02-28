@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream:      #F5F0E8;
+      --parchment:  #EDE7D6;
+      --gold:       #C9A84C;
+      --gold-light: #E8D08A;
+      --gold-dark:  #9A7A2E;
+      --ink:        #1A1612;
+      --ink-soft:   #3D3529;
+      --ink-muted:  #7A7062;
+      --maroon:     #6B1E2A;
+      --maroon-soft:#8B3040;
+      --white:      #FEFCF7;
+      --border:     rgba(201,168,76,0.25);
+      --border-dark:rgba(201,168,76,0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100%;
+      background: var(--cream);
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--ink);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 32px 16px 48px;
+      background:
+        radial-gradient(ellipse 900px 600px at 50% -80px, rgba(201,168,76,0.12), transparent 65%),
+        radial-gradient(ellipse 600px 400px at 80% 110%, rgba(107,30,42,0.08), transparent 60%),
+        var(--cream);
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 520px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .abc-logo {
+      width: min(200px, 65vw);
+      height: auto;
+      display: block;
+      margin: 0 auto 14px;
+    }
+
+    .header-rule {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 auto;
+      max-width: 260px;
+    }
+
+    .header-rule span {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .diamond {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .header-sub {
+      margin-top: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px 28px 28px;
+      box-shadow:
+        0 2px 0 var(--gold),
+        0 20px 60px rgba(26,22,18,0.12),
+        0 4px 16px rgba(26,22,18,0.06);
+      position: relative;
+    }
+
+    /* Subtle corner ornaments */
+    .card::before, .card::after {
+      content: '';
+      position: absolute;
+      width: 20px; height: 20px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.5;
+    }
+    .card::before {
+      top: 10px; left: 10px;
+      border-width: 1px 0 0 1px;
+    }
+    .card::after {
+      bottom: 10px; right: 10px;
+      border-width: 0 1px 1px 0;
+    }
+
+    /* ── Partner logo ── */
+    .partner-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .partner-plate {
+      width: 68px; height: 68px;
+      border-radius: 2px;
+      border: 1px solid var(--border-dark);
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    .partner-logo {
+      max-width: 56px;
+      max-height: 56px;
+      object-fit: contain;
+    }
+
+    /* ── Card titles ── */
+    .card-eyebrow {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 500;
+      text-align: center;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .partner-name {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--maroon);
+      margin-top: 6px;
+    }
+
+    /* ── Instruction note ── */
+    .note {
+      margin-top: 20px;
+      padding: 14px 16px;
+      border-left: 2px solid var(--gold);
+      background: linear-gradient(90deg, rgba(201,168,76,0.06), transparent);
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+
+    .note strong {
+      color: var(--ink);
+    }
+
+    /* ── Form fields ── */
+    .field {
+      margin-top: 18px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 8px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 13px 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--ink);
+      background: var(--cream);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .field input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+      background: var(--white);
+    }
+
+    .field input::placeholder {
+      color: var(--ink-muted);
+      font-weight: 300;
+      font-size: 13px;
+    }
+
+    /* ── Button ── */
+    .btn {
+      width: 100%;
+      margin-top: 24px;
+      padding: 15px 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--maroon), #8B2535);
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 18px rgba(107,30,42,0.3);
+    }
+
+    .btn:hover:not(:disabled) {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(107,30,42,0.35);
+    }
+
+    .btn:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* ── Status msg ── */
+    .status {
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: var(--ink-muted);
+      text-align: center;
+      min-height: 16px;
+    }
+
+    /* ── Result panels ── */
+    #big { margin-top: 18px; }
+
+    .result {
+      border-radius: 2px;
+      padding: 20px;
+      text-align: center;
+      border-width: 1px;
+      border-style: solid;
+    }
+
+    .result-valid {
+      background: linear-gradient(135deg, #F0FAF4, #E8F7EE);
+      border-color: #84C49A;
+      color: #0D4A26;
+    }
+
+    .result-invalid {
+      background: linear-gradient(135deg, #FBF0F1, #F7E8E9);
+      border-color: #D4909A;
+      color: #5C0F1B;
+    }
+
+    .result-expired {
+      background: linear-gradient(135deg, #FBF6EE, #F7F0E0);
+      border-color: #D4B87A;
+      color: #5C3D0A;
+    }
+
+    .result-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      line-height: 1;
+    }
+
+    .result-sub {
+      margin-top: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    /* ── Proof grid ── */
+    .proof {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 16px;
+      text-align: left;
+    }
+
+    .proof-item {
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 2px;
+    }
+
+    .proof-label {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(13,74,38,0.6);
+      margin-bottom: 4px;
+    }
+
+    .proof-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(13,74,38,0.9);
+      word-break: break-all;
+    }
+
+    .countdown-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--maroon);
+    }
+
+    /* ── Divider ── */
+    .card-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-dark), transparent);
+      margin: 22px 0;
+    }
+
+    /* ── Footer ── */
+    .foot {
+      margin-top: 18px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-align: center;
+    }
+
+    /* Spinner for loading */
+    .spinner {
+      display: inline-block;
+      width: 14px; height: 14px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="header">
+      <img class="abc-logo" id="abcLogo" alt="ABC Hyde Park Hotel">
+      <div class="header-rule">
+        <span></span><div class="diamond"></div><span></span>
+      </div>
+      <div class="header-sub">Guest Partner Access</div>
+    </div>
+
+    <div class="card">
+
+      <div class="partner-row">
+        <div class="partner-plate" id="partnerPlate">
+          <img class="partner-logo" id="partnerLogo" alt="Partner">
+        </div>
+      </div>
+
+      <div class="card-eyebrow">Access Validation</div>
+      <h1 class="card-title">Guest Verification</h1>
+      <div class="partner-name" id="partnerNameDisplay"><?= data.partner_name ?></div>
+
+      <div class="note">
+        Please enter your <strong>Booking Reference</strong> and <strong>Last Name</strong> exactly as they appear on your reservation.<br><br>
+        Staff will only accept <strong>VALID</strong> while the countdown is active.
+      </div>
+
+      <div class="card-divider"></div>
+
+      <div class="field">
+        <label>Booking Reference</label>
+        <input id="booking_ref" placeholder="e.g. RES-123456" autocomplete="off" spellcheck="false">
+      </div>
+
+      <div class="field">
+        <label>Last Name</label>
+        <input id="last_name" placeholder="As shown on booking" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label>Staff / Device Note <span style="font-weight:300;text-transform:none;letter-spacing:0">(optional)</span></label>
+        <input id="device_note" placeholder="Optional" autocomplete="off">
+      </div>
+
+      <button class="btn" id="btn" onclick="validateNow()">Verify Access</button>
+
+      <div id="msg" class="status"></div>
+      <div id="big"></div>
+
+      <div class="card-divider" style="margin-top:22px"></div>
+      <div class="foot">ABC Hyde Park Hotel &nbsp;·&nbsp; Access limited to in-house guests during an active stay</div>
+    </div>
+
+  </div>
+
+<script>
+  const partnerId    = "<?= data.partner_id ?>";
+  const POST_URL     = "<?= data.post_url ?>";
+  const ABC_LOGO_URL = "<?= data.abc_logo_url ?>";
+  const PARTNER_LOGO_URL = "<?= data.partner_logo_url ?>";
+
+  const $ = id => document.getElementById(id);
+  let countdownTimer = null;
+
+  function setBusy(busy) { $("btn").disabled = busy; }
+  function setBtnText(txt) { $("btn").innerHTML = txt; }
+  function showResult(html) { $("big").innerHTML = html; }
+
+  function clearCountdown() {
+    if (countdownTimer) { clearInterval(countdownTimer); countdownTimer = null; }
+  }
+
+  (function setLogos() {
+    $("abcLogo").src = ABC_LOGO_URL || "";
+    $("abcLogo").onerror = () => { $("abcLogo").style.display = "none"; };
+    if (PARTNER_LOGO_URL) {
+      $("partnerLogo").src = PARTNER_LOGO_URL;
+      $("partnerLogo").onerror = () => { $("partnerPlate").style.display = "none"; };
+    } else {
+      $("partnerPlate").style.display = "none";
+    }
+  })();
+
+  function formatTime(iso) {
+    try {
+      return new Date(iso).toLocaleString([], { year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit" });
+    } catch(e) { return iso; }
+  }
+
+  function formatCountdown(seconds) {
+    const s = Math.max(0, seconds | 0);
+    const m = Math.floor(s / 60);
+    const r = s % 60;
+    return m > 0 ? `${m}:${String(r).padStart(2,"0")}` : `${r}s`;
+  }
+
+  function startCountdown(expiresAtIso) {
+    clearCountdown();
+    const expiresMs = Date.parse(expiresAtIso);
+    countdownTimer = setInterval(() => {
+      const remaining = Math.max(0, Math.ceil((expiresMs - Date.now()) / 1000));
+      const el = document.getElementById("countdownValue");
+      if (el) el.textContent = formatCountdown(remaining);
+      if (remaining <= 0) {
+        clearCountdown();
+        showResult(`
+          <div class="result result-expired">
+            <div class="result-title">Expired</div>
+            <div class="result-sub">Please re-verify to generate a fresh proof</div>
+          </div>`);
+        $("msg").textContent = "Proof expired — press Verify to generate a new code.";
+        setBusy(false);
+        setBtnText("Verify Access");
+      }
+    }, 250);
+  }
+
+  async function validateNow() {
+    clearCountdown();
+    setBusy(true);
+    setBtnText('<span class="spinner"></span>Checking&hellip;');
+    $("msg").textContent = "";
+    showResult("");
+
+    const booking_ref = $("booking_ref").value.trim();
+    const last_name   = $("last_name").value.trim();
+    const device_note = $("device_note").value.trim();
+
+    if (!booking_ref || !last_name) {
+      $("msg").textContent = "Please enter both booking reference and last name.";
+      showResult(`<div class="result result-invalid"><div class="result-title">Not Valid</div></div>`);
+      setBusy(false);
+      setBtnText("Verify Access");
+      return;
+    }
+
+    const params = new URLSearchParams();
+    params.set("p", partnerId);
+    params.set("booking_ref", booking_ref);
+    params.set("last_name", last_name);
+    params.set("device_note", device_note);
+    params.set("lat", "");
+    params.set("lng", "");
+
+    let res, data;
+    try {
+      res = await fetch(POST_URL, { method:"POST", headers:{"Content-Type":"application/x-www-form-urlencoded"}, body:params.toString() });
+      data = await res.json();
+    } catch(e) {
+      $("msg").textContent = "Network error — please try again.";
+      showResult(`<div class="result result-invalid"><div class="result-title">Error</div></div>`);
+      setBusy(false);
+      setBtnText("Verify Access");
+      return;
+    }
+
+    $("msg").textContent = data.message || "";
+
+    if (data.ok) {
+      const masked     = data.booking_ref_masked || "";
+      const code       = data.approval_code || "";
+      const approvedAt = data.approved_at || "";
+      const expiresAt  = data.expires_at || "";
+
+      showResult(`
+        <div class="result result-valid">
+          <div class="result-title">Valid ✓</div>
+          <div class="result-sub">Only accept while countdown is active</div>
+          <div class="proof">
+            <div class="proof-item">
+              <div class="proof-label">Booking Ref</div>
+              <div class="proof-value">${masked}</div>
+            </div>
+            <div class="proof-item">
+              <div class="proof-label">Approval Code</div>
+              <div class="proof-value">${code}</div>
+            </div>
+            <div class="proof-item">
+              <div class="proof-label">Approved At</div>
+              <div class="proof-value">${formatTime(approvedAt)}</div>
+            </div>
+            <div class="proof-item">
+              <div class="proof-label">Valid For</div>
+              <div class="proof-value countdown-value" id="countdownValue">--</div>
+            </div>
+          </div>
+        </div>`);
+
+      startCountdown(expiresAt);
+      setBusy(false);
+      setBtnText("Re-verify");
+
+    } else {
+      showResult(`<div class="result result-invalid"><div class="result-title">Not Valid</div><div class="result-sub">${data.message || ""}</div></div>`);
+      setBusy(false);
+      setBtnText("Verify Access");
+    }
+  }
+</script>
+</body>
+</html>
